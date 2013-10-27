@@ -1,0 +1,590 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MissileSharp</name>
+    </assembly>
+    <members>
+        <member name="T:MissileSharp.Command">
+            <summary>
+            Possible commands for the missile launcher 
+            </summary>
+        </member>
+        <member name="F:MissileSharp.Command.Up">
+            <summary>
+            move up
+            </summary>
+        </member>
+        <member name="F:MissileSharp.Command.Down">
+            <summary>
+            move down
+            </summary>
+        </member>
+        <member name="F:MissileSharp.Command.Left">
+            <summary>
+            turn left
+            </summary>
+        </member>
+        <member name="F:MissileSharp.Command.Right">
+            <summary>
+            turn right
+            </summary>
+        </member>
+        <member name="F:MissileSharp.Command.Reset">
+            <summary>
+            reset position
+            </summary>
+        </member>
+        <member name="F:MissileSharp.Command.Fire">
+            <summary>
+            fire missiles
+            </summary>
+        </member>
+        <member name="T:MissileSharp.ConfigReader">
+            <summary>
+            Reads command sets from a config file
+            </summary>
+        </member>
+        <member name="M:MissileSharp.ConfigReader.Read(System.String)">
+            <summary>
+            Reads a config file into a Dictionary of command sets
+            </summary>
+            <param name="configFile">The config file to load</param>
+            <returns>A Dictionary of command sets</returns>
+        </member>
+        <member name="M:MissileSharp.ConfigReader.Read(System.String[])">
+            <summary>
+            Reads a config file into a Dictionary of command sets
+            </summary>
+            <param name="configFileLines">The config file lines</param>
+            <returns>A Dictionary of command sets</returns>
+        </member>
+        <member name="T:MissileSharp.HidLibraryDevice">
+            <summary>
+            IHidDevice implementation for HidLibrary
+            </summary> 
+        </member>
+        <member name="T:MissileSharp.IHidDevice">
+            <summary>
+            base interface for HID device library
+            </summary>
+        </member>
+        <member name="M:MissileSharp.IHidDevice.Initialize(System.Int32,System.Int32)">
+            <summary>
+            Initializes the device.
+            </summary>
+            <param name="vendorId">VendorId of the device</param>
+            <param name="deviceId">DeviceId of the device</param>
+        </member>
+        <member name="M:MissileSharp.IHidDevice.Dispose">
+            <summary>
+            Disposes the device.
+            </summary>
+        </member>
+        <member name="M:MissileSharp.IHidDevice.SendData(System.Byte[])">
+            <summary>
+            Sends data to the device.
+            </summary>
+            <param name="data">Data to send</param>
+        </member>
+        <member name="P:MissileSharp.IHidDevice.IsReady">
+            <summary>
+            Indicates if the device is ready to receive commands.
+            </summary>
+        </member>
+        <member name="T:MissileSharp.ICommandCenter">
+            <summary>
+            Controls an USB missile launcher
+            </summary>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.RunCommand(MissileSharp.LauncherCommand)">
+            <summary>
+            Runs a LauncherCommand
+            </summary>
+            <param name="command">The command to run</param>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.RunCommandSet(System.Collections.Generic.IEnumerable{MissileSharp.LauncherCommand})">
+            <summary>
+            Runs a list of LauncherCommands
+            </summary>
+            <param name="commands">The list of commands to run</param>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.RunCommandSet(System.String)">
+            <summary>
+            Runs a list of LauncherCommands by name (commands must have been loaded before using LoadCommandSets)
+            </summary>
+            <param name="commandSetName">The name of the command set to run</param>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.LoadCommandSets(System.String)">
+            <summary>
+            Loads a list of command sets from a config file (execute command sets with RunCommandSet)
+            </summary>
+            <param name="pathToConfigFile">Complete path to the config file</param>
+            <returns>True if at least one command set was loaded</returns>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.LoadCommandSets(System.String[])">
+            <summary>
+            Loads a list of command sets from a config file (execute command sets with RunCommandSet)
+            </summary>
+            <param name="configFileLines">The lines of the config file (after loading the file with File.ReadAllLines)</param>
+            <returns>True if at least one command set was loaded</returns>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.GetLoadedCommandSetNames">
+            <summary>
+            Gets a list with the names of all loaded command sets.
+            </summary>
+            <returns>A list of command set names</returns>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.Up(System.Int32)">
+            <summary>
+            Move up for X milliseconds
+            </summary>
+            <param name="milliseconds">Time to move</param>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.Down(System.Int32)">
+            <summary>
+            Move down for X milliseconds
+            </summary>
+            <param name="milliseconds">Time to move</param>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.Left(System.Int32)">
+            <summary>
+            Turn left for X milliseconds
+            </summary>
+            <param name="milliseconds">Time to move</param>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.Right(System.Int32)">
+            <summary>
+            Turn right for X milliseconds
+            </summary>
+            <param name="milliseconds">Time to move</param>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.Reset">
+            <summary>
+            Reset the launcher position (=move to bottom left)
+            </summary>
+        </member>
+        <member name="M:MissileSharp.ICommandCenter.Fire(System.Int32)">
+            <summary>
+            Fire X missiles
+            </summary>
+            <param name="numberOfShots">Number of missiles to fire</param>
+        </member>
+        <member name="P:MissileSharp.ICommandCenter.IsReady">
+            <summary>
+            The device is ready to receive commands
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ICommandCenter.LauncherModelName">
+            <summary>
+            The name of the device
+            </summary>
+        </member>
+        <member name="T:MissileSharp.ILauncherModel">
+            <summary>
+            base interface for all missile launcher models
+            </summary>
+        </member>
+        <member name="M:MissileSharp.ILauncherModel.CreateCommand(System.Byte)">
+            <summary>
+            Create the final command to send to the launcher
+            </summary>
+            <param name="command">The command to send (move, fire etc.)</param>
+            <returns>byte array to send to the launcher</returns>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.ModelName">
+            <summary>
+            Name of the device (human readable)
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.VendorId">
+            <summary>
+            VendorId of the device
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.DeviceId">
+            <summary>
+            DeviceId of the device
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.Down">
+            <summary>
+            Command to move down
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.Up">
+            <summary>
+            Command to move up
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.Left">
+            <summary>
+            Command to turn left
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.Right">
+            <summary>
+            Command to turn right
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.Stop">
+            <summary>
+            Command to stop moving
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.Fire">
+            <summary>
+            Command to fire a missile
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.MinNumberOfShots">
+            <summary>
+            Minimum number of shots possible (usually 1)
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.MaxNumberOfShots">
+            <summary>
+            Maximum number of shots possible
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.ResetTimeLeft">
+            <summary>
+            Reset position: move X milliseconds left
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.ResetTimeDown">
+            <summary>
+            Reset position: move X milliseconds down
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.WaitBeforeFire">
+            <summary>
+            Wait X milliseconds before first shot
+            </summary>
+        </member>
+        <member name="P:MissileSharp.ILauncherModel.WaitAfterFire">
+            <summary>
+            Wait X milliseconds after each shot
+            </summary>
+        </member>
+        <member name="T:MissileSharp.CommandCenter">
+            <summary>
+            Controls an USB missile launcher
+            </summary>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.#ctor(MissileSharp.ILauncherModel)">
+            <summary>
+            Initializes a new instance of the CommandCenter class using the specified missile launcher model.
+            </summary>
+            <param name="launcher">missile launcher model you want to control</param>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.#ctor(MissileSharp.ILauncherModel,MissileSharp.IHidDevice)">
+            <summary>
+            Initializes a new instance of the CommandCenter class using the specified missile launcher model and HID library implementation.
+            </summary>
+            <param name="launcher">missile launcher model you want to control</param>
+            <param name="device">HID library that will be used</param>
+            <remarks>This is only for testing - HidLibrary is the default library for production use</remarks>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.RunCommand(MissileSharp.LauncherCommand)">
+            <summary>
+            Runs a LauncherCommand
+            </summary>
+            <param name="command">The command to run</param>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.RunCommandSet(System.Collections.Generic.IEnumerable{MissileSharp.LauncherCommand})">
+            <summary>
+            Runs a list of LauncherCommands
+            </summary>
+            <param name="commands">The list of commands to run</param>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.RunCommandSet(System.String)">
+            <summary>
+            Runs a list of LauncherCommands by name (commands must have been loaded before using LoadCommandSets)
+            </summary>
+            <param name="commandSetName">The name of the command set to run</param>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.LoadCommandSets(System.String)">
+            <summary>
+            Loads a list of command sets from a config file (execute command sets with RunCommandSet)
+            </summary>
+            <param name="pathToConfigFile">Complete path to the config file</param>
+            <returns>True if at least one command set was loaded</returns>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.LoadCommandSets(System.String[])">
+            <summary>
+            Loads a list of command sets from a config file (execute command sets with RunCommandSet)
+            </summary>
+            <param name="configFileLines">The lines of the config file (after loading the file with File.ReadAllLines)</param>
+            <returns>True if at least one command set was loaded</returns>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.GetLoadedCommandSetNames">
+            <summary>
+            Gets a list with the names of all loaded command sets.
+            </summary>
+            <returns>A list of command set names</returns>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.Up(System.Int32)">
+            <summary>
+            Move up for X milliseconds
+            </summary>
+            <param name="milliseconds">Time to move</param>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.Down(System.Int32)">
+            <summary>
+            Move down for X milliseconds
+            </summary>
+            <param name="milliseconds">Time to move</param>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.Left(System.Int32)">
+            <summary>
+            Turn left for X milliseconds
+            </summary>
+            <param name="milliseconds">Time to move</param>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.Right(System.Int32)">
+            <summary>
+            Turn right for X milliseconds
+            </summary>
+            <param name="milliseconds">Time to move</param>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.Reset">
+            <summary>
+            Reset the launcher position (=move to bottom left)
+            </summary>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.Fire(System.Int32)">
+            <summary>
+            Fire X missiles
+            </summary>
+            <param name="numberOfShots">Number of missiles to fire</param>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.Dispose">
+            <summary>
+            dispose the device
+            </summary>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.SendCommand(System.Byte)">
+            <summary>
+            Send a command to the device
+            </summary>
+            <param name="command">The command to send</param>
+        </member>
+        <member name="M:MissileSharp.CommandCenter.SendMoveCommand(System.Byte,System.Int32)">
+            <summary>
+            Send a move command to the device, wait X milliseconds, then stop
+            </summary>
+            <param name="command">The command to send</param>
+            <param name="milliseconds">Time to wait</param>
+        </member>
+        <member name="P:MissileSharp.CommandCenter.LauncherModelName">
+            <summary>
+            The name of the device
+            </summary>
+        </member>
+        <member name="P:MissileSharp.CommandCenter.IsReady">
+            <summary>
+            The device is ready to receive commands
+            </summary>
+        </member>
+        <member name="T:MissileSharp.LauncherCommand">
+            <summary>
+            One single command
+            </summary>
+        </member>
+        <member name="M:MissileSharp.LauncherCommand.#ctor(System.String,System.Int32)">
+            <summary>
+            Creates a new instance of the LauncherCommand class
+            </summary>
+            <param name="command">the actual command as a string ("down", "fire" etc.)</param>
+            <param name="value">numeric value (movement: milliseconds / firing: number of shots)</param>
+        </member>
+        <member name="M:MissileSharp.LauncherCommand.#ctor(MissileSharp.Command,System.Int32)">
+            <summary>
+            Creates a new instance of the LauncherCommand class
+            </summary>
+            <param name="command">the actual command</param>
+            <param name="value">numeric value (movement: milliseconds / firing: number of shots)</param>
+        </member>
+        <member name="P:MissileSharp.LauncherCommand.Command">
+            <summary>
+            the actual command
+            </summary>
+        </member>
+        <member name="P:MissileSharp.LauncherCommand.Value">
+            <summary>
+            numeric value (movement: milliseconds / firing: number of shots)
+            </summary>
+        </member>
+        <member name="T:MissileSharp.CommandSetList">
+            <summary>
+            A dictionary of lists of LauncherCommands, searchable by command set name
+            </summary>
+        </member>
+        <member name="M:MissileSharp.CommandSetList.#ctor">
+            <summary>
+            Creates a new instance of the LauncherCommandList class
+            </summary>
+        </member>
+        <member name="M:MissileSharp.CommandSetList.Add(System.String,MissileSharp.LauncherCommand)">
+            <summary>
+            Add a new item to a command set (command set will be created if it doesn't exist)
+            </summary>
+            <param name="commandSetName">The name of the command set</param>
+            <param name="command">The actual command</param>
+        </member>
+        <member name="M:MissileSharp.CommandSetList.Add(System.String,System.String,System.Int32)">
+            <summary>
+            Add a new item to a command set (command set will be created if it doesn't exist)
+            </summary>
+            <param name="commandSetName">The name of the command set</param>
+            <param name="command">The actual command ("left", "fire" etc.)</param>
+            <param name="value">Numeric value for the command (duration/number of shots)</param>
+        </member>
+        <member name="M:MissileSharp.CommandSetList.Add(System.String,MissileSharp.Command,System.Int32)">
+            <summary>
+            Add a new item to a command set (command set will be created if it doesn't exist)
+            </summary>
+            <param name="commandSetName">The name of the command set</param>
+            <param name="command">The actual command</param>
+            <param name="value">Numeric value for the command (duration/number of shots)</param>
+        </member>
+        <member name="M:MissileSharp.CommandSetList.GetCommandSet(System.String)">
+            <summary>
+            Get a command set (=list of LauncherCommands) by name
+            </summary>
+            <param name="commandSetName">The name to search for</param>
+            <returns>A list of commands (empty if the name is not found)</returns>
+        </member>
+        <member name="M:MissileSharp.CommandSetList.GetCommandSetNames">
+            <summary>
+            Gets the names of all available command sets
+            </summary>
+            <returns>A list of command set names</returns>
+        </member>
+        <member name="M:MissileSharp.CommandSetList.CountSets">
+            <summary>
+            Counts the number of command sets.
+            </summary>
+        </member>
+        <member name="M:MissileSharp.CommandSetList.CountCommands(System.String)">
+            <summary>
+            Counts the number of commands in a specific command set.
+            </summary>
+            <param name="commandSetName">The name of the command set</param>
+            <returns></returns>
+        </member>
+        <member name="M:MissileSharp.CommandSetList.ContainsCommandSet(System.String)">
+            <summary>
+            Checks whether a command set with the given name exists
+            </summary>
+            <param name="commandSetName">The name of the command set</param>
+            <returns>True if it exists, False if not</returns>
+        </member>
+        <member name="T:MissileSharp.LauncherModelFactory">
+            <summary>
+            Factory for loading an ILauncherModel by its name
+            </summary>
+        </member>
+        <member name="M:MissileSharp.LauncherModelFactory.GetLauncher(System.String,System.String)">
+            <summary>
+            Loads the ILauncherModel with the given name
+            </summary>
+            <param name="className">The ILauncherModel class to load (syntax: Namespace.Class)</param>
+            <param name="assemblyName">The name of the assembly (if the class is not in the MissileSharp assembly)</param>
+            <returns></returns>
+        </member>
+        <member name="M:MissileSharp.LauncherModelFactory.GetLauncher(System.String)">
+            <summary>
+            Loads the ILauncherModel with the given name
+            </summary>
+            <param name="className">The ILauncherModel class to load (syntax: Namespace.Class)</param>
+            <returns></returns>
+        </member>
+        <member name="T:MissileSharp.Properties.Resources">
+            <summary>
+              Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.ResourceManager">
+            <summary>
+              Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.Culture">
+            <summary>
+              Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+              Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.CommandEmpty">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die command is empty ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.CommandMustBeOneOfFollowing">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die command must be one of the following: up, down, left, right, reset, fire ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.CommandSetNameEmpty">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die command set name is empty ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.DeviceIsNotReady">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The device is not ready, please check the connection! ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.DeviceIsNull">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die &quot;device&quot; parameter is null! ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.FirstLineMustBeCommandSetName">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The first line in the config must be a command set name. There can be no commands before the first command set name! ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.LauncherIsNull">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die &quot;launcher&quot; parameter is null! ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.LauncherModelIsNotILauncherModel">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Launcher model &apos;{0}&apos; does not implement interface ILauncherModel ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.LauncherModelNotFound">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die No launcher model with this name available:  ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.LineDoesNotContainTwoItems">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die This line in the config file does not contain exactly two items:  ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.NoCommandSets">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die No command sets available. You need to load them first using the LoadCommandSets method! ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.SecondItemMustBeNumeric">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The second item in this line in the config file must be numeric:  ähnelt.
+            </summary>
+        </member>
+        <member name="P:MissileSharp.Properties.Resources.ValueMustBeEqualGreaterZero">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die value must be equal or greater than zero ähnelt.
+            </summary>
+        </member>
+        <member name="T:MissileSharp.ThunderMissileLauncher">
+            <summary>
+            Dream Cheeky Thunder Missile Launcher
+            </summary>
+        </member>
+    </members>
+</doc>
