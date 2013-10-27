@@ -1,3 +1,6 @@
+build
+buildartifacts
+release
 obj
 bin
 deploy
