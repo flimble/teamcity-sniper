@@ -1,3 +1,3 @@
-powershell -Command "& {Import-Module .\psake.psm1; Invoke-psake .\default.ps1 Compile }"
+powershell -Command "& {Import-Module .\psake.psm1; Invoke-psake .\default.ps1 UnitTest }"
 
 pause
