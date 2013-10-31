@@ -11,13 +11,15 @@ namespace TeamCitySniper
     {
         private readonly ExchangeService _exchangeService;
         private readonly ICommandCenter _commandCenter;
+        private readonly IFileReader _reader;
         private readonly string _settingsFile;
         
 
-        public ProcessFailureMessage(ExchangeService exchangeService, ICommandCenter commandCenter, string settingsFile)
+        public ProcessFailureMessage(ExchangeService exchangeService, ICommandCenter commandCenter, IFileReader reader, string settingsFile)
         {
             _exchangeService = exchangeService;
             _commandCenter = commandCenter;
+            _reader = reader;
             _settingsFile = settingsFile;
         }
 
@@ -28,7 +30,9 @@ namespace TeamCitySniper
             Logger.DebugFormat("Bound mail item received on:{0} with subject:{1}", mailItem.DateTimeReceived, mailItem.Subject);            
             
             //parse the email and call teamcity           
-            var sniper = new MissileLauncher(_commandCenter,_settingsFile);
+
+
+            var sniper = new MissileLauncher(_commandCenter, _reader.ReadAllLines(_settingsFile));
             
             foreach (var suspect in sniper.Suspects)
             {

@@ -23,7 +23,7 @@ namespace TeamCitySniper.Console
             catch (Exception e )
             {
                 Logger.Error(e);
-                return (int)ExitCode.Success;
+                return (int)ExitCode.Fail;
             }
 
             

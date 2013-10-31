@@ -9,7 +9,6 @@ properties {
 	$framework = '4.5'
 	$nunit_exe = Join-Path $root_path 'packages\NUnit.Runners.2.6.2\tools\nunit-console-x86.exe'
 	$unittest_assembly_filter = '*Tests*.dll'	
-
 }
 
 include .\psake_ext.ps1

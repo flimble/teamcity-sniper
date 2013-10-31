@@ -63,12 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Email.cs" />
+    <Compile Include="IFileReader.cs" />
     <Compile Include="ProcessFailureMessage.cs" />
     <Compile Include="IFindMailItems.cs" />
     <Compile Include="ISentence.cs" />
     <Compile Include="IProcessMailItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sentence.cs" />
+    <Compile Include="MissileLauncher.cs" />
     <Compile Include="TeamCityMailerFinder.cs" />
   </ItemGroup>
   <ItemGroup>

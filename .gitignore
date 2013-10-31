@@ -1,10 +1,10 @@
-build
-buildartifacts
-release
 obj
 bin
 deploy
 deploy/*
+release
+build
+buildartifacts
 _ReSharper.*
 *.csproj.user
 *.resharper.user

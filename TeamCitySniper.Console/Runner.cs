@@ -109,7 +109,7 @@ namespace TeamCitySniper.Console
             exchangeService.AutodiscoverUrl(autodiscoverSmtpAddress, redirect => true);
 
 
-            IProcessMailItem processor = new ProcessFailureMessage(exchangeService, new CommandCenter(new ThunderMissileLauncher()), ConfigurationManager.AppSettings["SuspectsConfigFile"]);
+            IProcessMailItem processor = new ProcessFailureMessage(exchangeService, new CommandCenter(new ThunderMissileLauncher()), new FileReader(), ConfigurationManager.AppSettings["SuspectsConfigFile"]);
 
 
             IFindMailItems finder = new TeamCityMailerFinder(exchangeService, 0, minDate);
