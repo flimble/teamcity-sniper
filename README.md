@@ -1,17 +1,20 @@
-**configgenerator**
-----------
+![logo](https://raw.githubusercontent.com/flimble/teamcity-sniper/master/docs/images/target.png) 
+# TeamCity Sniper
 
-Configuration management simplified
+Watches your teamcity build via notification email sent to an exchange mailbox.
+Fires <b>Dream Cheaky</b> USB missile to the offender based on their seating position. 
 
-**Title**
+# Installation
 
-asdfa
+Configure TeamCity sniper as a scheduled task to poll for email at required frequency.
+Processed emails will be moved into "Processed" folder within your inbox. 
 
-**Credits**
-Ipsum Lorem et Dolor
+To calibrate, modify the suspects.txt file for number of up and right
 
 
-** **
+
+
+
 
 
 
