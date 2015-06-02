@@ -1,3 +1,4 @@
+![logo](https://raw.githubusercontent.com/flimble/teamcity-sniper/master/docs/images/target.png)
 # TeamCity Sniper
 
 Watches your teamcity build via notification email sent to an exchange mailbox.
